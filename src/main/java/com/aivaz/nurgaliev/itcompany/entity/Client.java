@@ -16,8 +16,8 @@ public class Client {
     @Column(name = "client_id")
     private Integer clientId;
 
-    @Column(name = "team_id")
-    private Integer teamId;
+/*    @Column(name = "team_id")
+    private Integer teamId;*/
 
     @Column(name = "client_name")
     @NotNull
@@ -28,14 +28,21 @@ public class Client {
     private Date clientStartCooperationDate;
 
     @ManyToOne
-    @JoinColumn(name = "team_id", referencedColumnName = "team_id", insertable = false, updatable = false)
+    @JoinColumn(name = "department_id", referencedColumnName = "department_id")//, insertable = false, updatable = false)
     @JsonIgnore
-    private DeveloperTeam developerTeam;
+    private ItCompanyDepartment itCompanyDepartment;
 
     @OneToOne(mappedBy = "client")
-    @JsonIgnore
+    //@JsonIgnore
     private ClientDetails clientDetails;
 
+    public ItCompanyDepartment getItCompanyDepartment() {
+        return itCompanyDepartment;
+    }
+
+    public void setItCompanyDepartment(ItCompanyDepartment itCompanyDepartment) {
+        this.itCompanyDepartment = itCompanyDepartment;
+    }
 
     public Integer getClientId() {
         return clientId;
@@ -45,13 +52,13 @@ public class Client {
         this.clientId = clientId;
     }
 
-    public Integer getTeamId() {
+/*    public Integer getTeamId() {
         return teamId;
     }
 
     public void setTeamId(Integer teamId) {
         this.teamId = teamId;
-    }
+    }*/
 
     public String getClientName() {
         return clientName;
@@ -69,13 +76,13 @@ public class Client {
         this.clientStartCooperationDate = clientStartCooperationDate;
     }
 
-    public DeveloperTeam getDeveloperTeam() {
+ /*   public DeveloperTeam getDeveloperTeam() {
         return developerTeam;
     }
 
     public void setDeveloperTeam(DeveloperTeam developerTeam) {
         this.developerTeam = developerTeam;
-    }
+    }*/
 
     public ClientDetails getClientDetails() {
         return clientDetails;
@@ -85,28 +92,27 @@ public class Client {
         this.clientDetails = clientDetails;
     }
 
-    @Override
+  /*  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(clientId, client.clientId) && Objects.equals(teamId, client.teamId) && clientName.equals(client.clientName) && clientStartCooperationDate.equals(client.clientStartCooperationDate) && Objects.equals(developerTeam, client.developerTeam) && Objects.equals(clientDetails, client.clientDetails);
+        return Objects.equals(clientId, client.clientId) && clientName.equals(client.clientName) && clientStartCooperationDate.equals(client.clientStartCooperationDate) && Objects.equals(developerTeam, client.developerTeam) && Objects.equals(clientDetails, client.clientDetails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientId, teamId, clientName, clientStartCooperationDate, developerTeam, clientDetails);
+        return Objects.hash(clientId, clientName, clientStartCooperationDate, developerTeam, clientDetails);
     }
 
     @Override
     public String toString() {
         return "Client{" +
                 "clientId=" + clientId +
-                ", teamId=" + teamId +
                 ", clientName='" + clientName + '\'' +
                 ", clientStartCooperationDate=" + clientStartCooperationDate +
                 ", developerTeam=" + developerTeam +
                 ", clientDetails=" + clientDetails +
                 '}';
-    }
+    }*/
 }

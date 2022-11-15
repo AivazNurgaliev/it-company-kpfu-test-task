@@ -37,4 +37,14 @@ public class ClientService {
 
         return clients;
     }
+
+    public List<Client> getAllClientsByDepartmentId(Integer departmentId) throws DataNotFoundException {
+        List<Client> clients = clientRepository.findClientsByItCompanyDepartment_DepartmentId(departmentId);
+
+        if (clients == null) {
+            throw new DataNotFoundException("There's no clients in database");
+        }
+
+        return clients;
+    }
 }

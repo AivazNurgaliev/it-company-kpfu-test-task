@@ -34,8 +34,20 @@ public class ItCompanyDepartment {
     private String departmentEmail;
 
     @OneToMany(mappedBy = "itCompanyDepartment")
-    @JsonIgnore
+    //@JsonIgnore
     private List<DeveloperTeam> developerTeams = new ArrayList<>();
+
+    @OneToMany(mappedBy = "itCompanyDepartment")
+    //@JsonIgnore
+    private List<Client> clients;
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
 
     public Integer getDepartmentId() {
         return departmentId;

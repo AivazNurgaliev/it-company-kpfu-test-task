@@ -16,8 +16,8 @@ public class Developer {
     @Column(name = "developer_id")
     private Integer developerId;
 
-    @Column(name = "team_id")
-    private Integer teamId;
+/*    @Column(name = "team_id")
+    private Integer teamId;*/
 
     @Column(name = "developer_employment_date")
     @NotNull
@@ -32,7 +32,7 @@ public class Developer {
     private String developerRole;
 
     @ManyToOne
-    @JoinColumn(name = "team_id", referencedColumnName = "team_id", insertable = false, updatable = false)
+    @JoinColumn(name = "team_id", referencedColumnName = "team_id")//, insertable = false, updatable = false)
     @JsonIgnore
     private DeveloperTeam developerTeam;
 
@@ -50,14 +50,14 @@ public class Developer {
         this.developerId = developerId;
     }
 
-    public Integer getTeamId() {
+  /*  public Integer getTeamId() {
         return teamId;
     }
 
     public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
-
+*/
     public Date getDeveloperEmploymentDate() {
         return developerEmploymentDate;
     }
@@ -111,19 +111,18 @@ public class Developer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Developer developer = (Developer) o;
-        return Objects.equals(developerId, developer.developerId) && Objects.equals(teamId, developer.teamId) && developerEmploymentDate.equals(developer.developerEmploymentDate) && developerOccupation.equals(developer.developerOccupation) && developerRole.equals(developer.developerRole) && Objects.equals(developerTeam, developer.developerTeam) && Objects.equals(developerDetails, developer.developerDetails) && Objects.equals(developerPerformanceReview, developer.developerPerformanceReview);
+        return Objects.equals(developerId, developer.developerId) && developerEmploymentDate.equals(developer.developerEmploymentDate) && developerOccupation.equals(developer.developerOccupation) && developerRole.equals(developer.developerRole) && Objects.equals(developerTeam, developer.developerTeam) && Objects.equals(developerDetails, developer.developerDetails) && Objects.equals(developerPerformanceReview, developer.developerPerformanceReview);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(developerId, teamId, developerEmploymentDate, developerOccupation, developerRole, developerTeam, developerDetails, developerPerformanceReview);
+        return Objects.hash(developerId, developerEmploymentDate, developerOccupation, developerRole, developerTeam, developerDetails, developerPerformanceReview);
     }
 
     @Override
     public String toString() {
         return "Developer{" +
                 "developerId=" + developerId +
-                ", teamId=" + teamId +
                 ", developerEmploymentDate=" + developerEmploymentDate +
                 ", developerOccupation='" + developerOccupation + '\'' +
                 ", developerRole='" + developerRole + '\'' +

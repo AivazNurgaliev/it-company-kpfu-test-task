@@ -12,4 +12,5 @@ public interface ItCompanyDepartmentRepository extends JpaRepository<ItCompanyDe
 
     ItCompanyDepartment findByDepartmentId(Integer departmentId);
     //List<ItCompanyDepartment> findAll(Integer departmentId);
+    //List<ItCompanyDepartment> findByDe
 }

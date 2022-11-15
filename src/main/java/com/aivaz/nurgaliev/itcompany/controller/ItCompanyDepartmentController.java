@@ -3,6 +3,7 @@ package com.aivaz.nurgaliev.itcompany.controller;
 import com.aivaz.nurgaliev.itcompany.entity.ItCompanyDepartment;
 import com.aivaz.nurgaliev.itcompany.exception.DataNotFoundException;
 import com.aivaz.nurgaliev.itcompany.service.ItCompanyDepartmentService;
+import com.aivaz.nurgaliev.itcompany.util.DepartmentReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,6 @@ import java.util.List;
 public class ItCompanyDepartmentController {
 
     private final ItCompanyDepartmentService departmentService;
-
     @Autowired
     public ItCompanyDepartmentController(ItCompanyDepartmentService departmentService) {
         this.departmentService = departmentService;
@@ -26,9 +26,6 @@ public class ItCompanyDepartmentController {
     @GetMapping("/department/{departmentId}")
     public ItCompanyDepartment getDepartmentById(@PathVariable(name = "departmentId") Integer departmentId) {
         try {
-            //ItCompanyDepartment itCompanyDepartment = departmentService.getDepartment(departmentId);
-            //System.out.println(itCompanyDepartment.getDeveloperTeams());
-
             return departmentService.getDepartment(departmentId);
         } catch (DataNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
@@ -42,6 +39,17 @@ public class ItCompanyDepartmentController {
         try {
             return departmentService.getAllDepartments();
         } catch (DataNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @GetMapping("/department/{departmentId}/report")
+    public DepartmentReport getDepartmentReport(@PathVariable(name = "departmentId") Integer departmentId) {
+        try {
+            return departmentService.getDepartmentReport(departmentId);
+        }  catch (DataNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());

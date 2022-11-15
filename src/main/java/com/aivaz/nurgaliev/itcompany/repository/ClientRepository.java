@@ -10,5 +10,5 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     Client findByClientId(Integer clientId);
-    //List<Client> findAll();
+    List<Client> findClientsByItCompanyDepartment_DepartmentId(Integer departmentId);
 }

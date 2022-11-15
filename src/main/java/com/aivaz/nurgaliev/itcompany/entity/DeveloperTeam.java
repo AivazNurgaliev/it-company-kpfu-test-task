@@ -18,8 +18,10 @@ public class DeveloperTeam {
     @Column(name = "team_id")
     private Integer teamId;
 
+/*
     @Column(name = "department_id")
     private Integer departmentId;
+*/
 
     @Column(name = "team_name", unique = true)
     @NotNull
@@ -30,17 +32,17 @@ public class DeveloperTeam {
     private Date teamFoundationDate;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "department_id", insertable = false, updatable = false)
+    @JoinColumn(name = "department_id", referencedColumnName = "department_id")//, insertable = false, updatable = false)
     @JsonIgnore
     private ItCompanyDepartment itCompanyDepartment;
 
     @OneToMany(mappedBy = "developerTeam")
-    @JsonIgnore
+    //@JsonIgnore
     private List<Developer> developers;
 
-    @OneToMany(mappedBy = "developerTeam")
-    @JsonIgnore
-    private List<Client> clients;
+    /*@OneToMany(mappedBy = "developerTeam")
+    //@JsonIgnore
+    private List<Client> clients;*/
 
 
     public Integer getTeamId() {
@@ -51,14 +53,14 @@ public class DeveloperTeam {
         this.teamId = teamId;
     }
 
-    public Integer getDepartmentId() {
+ /*   public Integer getDepartmentId() {
         return departmentId;
     }
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
-
+*/
     public String getTeamName() {
         return teamName;
     }
@@ -91,37 +93,38 @@ public class DeveloperTeam {
         this.developers = developers;
     }
 
-    public List<Client> getClients() {
+/*    public List<Client> getClients() {
         return clients;
     }
 
     public void setClients(List<Client> clients) {
         this.clients = clients;
-    }
+    }*/
 
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeveloperTeam that = (DeveloperTeam) o;
-        return Objects.equals(teamId, that.teamId) && Objects.equals(departmentId, that.departmentId) && teamName.equals(that.teamName) && teamFoundationDate.equals(that.teamFoundationDate) && Objects.equals(itCompanyDepartment, that.itCompanyDepartment) && Objects.equals(developers, that.developers) && Objects.equals(clients, that.clients);
+        return Objects.equals(teamId, that.teamId) && teamName.equals(that.teamName) && teamFoundationDate.equals(that.teamFoundationDate) && Objects.equals(itCompanyDepartment, that.itCompanyDepartment) && Objects.equals(developers, that.developers) && Objects.equals(clients, that.clients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(teamId, departmentId, teamName, teamFoundationDate, itCompanyDepartment, developers, clients);
+        return Objects.hash(teamId, teamName, teamFoundationDate, itCompanyDepartment, developers, clients);
     }
+*/
 
-    @Override
+ /*   @Override
     public String toString() {
         return "DeveloperTeam{" +
                 "teamId=" + teamId +
-                ", departmentId=" + departmentId +
                 ", teamName='" + teamName + '\'' +
                 ", teamFoundationDate=" + teamFoundationDate +
                 ", itCompanyDepartment=" + itCompanyDepartment +
                 ", developers=" + developers +
                 ", clients=" + clients +
                 '}';
-    }
+    }*/
 }

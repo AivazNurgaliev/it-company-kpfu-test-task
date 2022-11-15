@@ -1,18 +1,22 @@
 package com.aivaz.nurgaliev.itcompany.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @Table(name = "developer_performance_review")
-public class DeveloperPerformanceReview {
+public class DeveloperPerformanceReview implements Serializable {
 
+/*
     @Id
     @Column(name = "developer_id")
     private Integer developerId;
+*/
 
     @Column(name = "dpr_rating")
     @NotNull
@@ -21,17 +25,19 @@ public class DeveloperPerformanceReview {
     @Column(name = "dpr_description")
     private String dprDescription;
 
+    @Id
     @OneToOne
     @JoinColumn(name = "developer_id", referencedColumnName = "developer_id", nullable = false)
+    @JsonIgnore
     private Developer developer;
 
-    public Integer getDeveloperId() {
+/*    public Integer getDeveloperId() {
         return developerId;
     }
 
     public void setDeveloperId(Integer developerId) {
         this.developerId = developerId;
-    }
+    }*/
 
     public BigDecimal getDbrRating() {
         return dbrRating;
@@ -62,19 +68,18 @@ public class DeveloperPerformanceReview {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeveloperPerformanceReview that = (DeveloperPerformanceReview) o;
-        return Objects.equals(developerId, that.developerId) && dbrRating.equals(that.dbrRating) && Objects.equals(dprDescription, that.dprDescription) && Objects.equals(developer, that.developer);
+        return dbrRating.equals(that.dbrRating) && Objects.equals(dprDescription, that.dprDescription) && developer.equals(that.developer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(developerId, dbrRating, dprDescription, developer);
+        return Objects.hash(dbrRating, dprDescription, developer);
     }
 
     @Override
     public String toString() {
         return "DeveloperPerformanceReview{" +
-                "developerId=" + developerId +
-                ", dbrRating=" + dbrRating +
+                "dbrRating=" + dbrRating +
                 ", dprDescription='" + dprDescription + '\'' +
                 ", developer=" + developer +
                 '}';
