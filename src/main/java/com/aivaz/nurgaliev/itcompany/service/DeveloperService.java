@@ -22,7 +22,7 @@ public class DeveloperService {
         Developer developer = developerRepository.findByDeveloperId(developerId);
 
         if (developer == null) {
-            throw new DataNotFoundException("Developer does not exist, wrong developerId");
+            throw new DataNotFoundException("Developer does not exist or invalid developerId");
         }
 
         return developer;
@@ -31,8 +31,9 @@ public class DeveloperService {
     public List<Developer> getAllDevelopersByTeamId(Integer teamId) throws DataNotFoundException {
         List<Developer> developers = developerRepository.findByDeveloperTeam_TeamId(teamId);
 
-        if (developers == null) {
-            throw new DataNotFoundException("Developer In this team does not exist, wrong teamId");
+        if (developers == null || developers.size() == 0) {
+            //System.out.println("Developer In this team does not exist, wrong teamId");
+            throw new DataNotFoundException("Developer In this team does not exist or invalid teamId");
         }
 
         return developers;

@@ -31,7 +31,6 @@ public class ClientDetails implements Serializable {
     @JsonIgnore
     private Client client;
 
-
     public String getClientEmail() {
         return clientEmail;
     }

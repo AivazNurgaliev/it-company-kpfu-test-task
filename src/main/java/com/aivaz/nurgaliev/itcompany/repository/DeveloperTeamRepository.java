@@ -9,9 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DeveloperTeamRepository extends JpaRepository<DeveloperTeam, Integer> {
-
     DeveloperTeam findByTeamId(Integer teamId);
-    //DeveloperTeam findByTeamIdIsNotContainingAndDevelopersAndClients(Integer teamId);
-    List<DeveloperTeam> findByItCompanyDepartment_DepartmentId(Integer departmentId);
-    //List<DeveloperTeam> findByI
 }

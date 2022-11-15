@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DeveloperDetailsService {
-
     private final DeveloperDetailsRepository developerDetailsRepository;
 
     @Autowired
@@ -20,7 +19,7 @@ public class DeveloperDetailsService {
         DeveloperDetails developerDetails = developerDetailsRepository.findByDeveloper_DeveloperId(developerId);
 
         if (developerDetails == null) {
-            throw new DataNotFoundException("Developer Details does not exist, probably invalid developerId");
+            throw new DataNotFoundException("Developer Details does not exist or invalid developerId");
         }
 
         return developerDetails;

@@ -23,6 +23,7 @@ public class ItCompanyDepartmentService {
     private final DeveloperTeamService teamService;
     private final DeveloperRepository developerRepository;
     private final ClientRepository clientRepository;
+
     @Autowired
     public ItCompanyDepartmentService(ItCompanyDepartmentRepository departmentRepository,
                                       DeveloperTeamService teamService,
@@ -37,8 +38,8 @@ public class ItCompanyDepartmentService {
         ItCompanyDepartment department = departmentRepository.findByDepartmentId(departmentId);
 
         if (department == null) {
-            throw new DataNotFoundException("It company's department does not exist," +
-                    "probably wrong department id");
+            throw new DataNotFoundException("It company's department does not exist " +
+                    "or invalid department id");
         }
 
         return department;
@@ -47,7 +48,7 @@ public class ItCompanyDepartmentService {
     public List<ItCompanyDepartment> getAllDepartments() throws DataNotFoundException {
         List<ItCompanyDepartment> departments = departmentRepository.findAll();
 
-        if (departments == null) {
+        if (departments == null || departments.size() == 0) {
             throw new DataNotFoundException("There's no departments in database");
         }
 
@@ -59,8 +60,8 @@ public class ItCompanyDepartmentService {
         ItCompanyDepartment department = departmentRepository.findByDepartmentId(departmentId);
 
         if (department == null) {
-            throw new DataNotFoundException("It company's department does not exist," +
-                    "probably wrong department id");
+            throw new DataNotFoundException("It company's department does not exist " +
+                    "or invalid department id");
         }
 
         List<Integer> teamIds = new ArrayList<>();

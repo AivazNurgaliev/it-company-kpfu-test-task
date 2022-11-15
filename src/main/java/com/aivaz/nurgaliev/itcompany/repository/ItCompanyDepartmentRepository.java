@@ -11,6 +11,4 @@ import java.util.Optional;
 public interface ItCompanyDepartmentRepository extends JpaRepository<ItCompanyDepartment, Integer> {
 
     ItCompanyDepartment findByDepartmentId(Integer departmentId);
-    //List<ItCompanyDepartment> findAll(Integer departmentId);
-    //List<ItCompanyDepartment> findByDe
 }

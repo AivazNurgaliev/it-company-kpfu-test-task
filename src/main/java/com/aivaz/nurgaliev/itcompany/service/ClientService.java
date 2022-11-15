@@ -22,7 +22,7 @@ public class ClientService {
         Client client = clientRepository.findByClientId(clientId);
 
         if (client == null) {
-            throw new DataNotFoundException("Client does not exist probably wrong clientId");
+            throw new DataNotFoundException("Client does not exist or invalid clientId");
         }
 
         return client;
@@ -31,7 +31,7 @@ public class ClientService {
     public List<Client> getAllClients() throws DataNotFoundException {
         List<Client> clients = clientRepository.findAll();
 
-        if (clients == null) {
+        if (clients == null || clients.size() == 0) {
             throw new DataNotFoundException("There's no clients in database");
         }
 
@@ -41,7 +41,7 @@ public class ClientService {
     public List<Client> getAllClientsByDepartmentId(Integer departmentId) throws DataNotFoundException {
         List<Client> clients = clientRepository.findClientsByItCompanyDepartment_DepartmentId(departmentId);
 
-        if (clients == null) {
+        if (clients == null || clients.size() == 0) {
             throw new DataNotFoundException("There's no clients in database");
         }
 
