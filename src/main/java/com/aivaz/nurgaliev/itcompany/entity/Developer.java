@@ -16,9 +16,6 @@ public class Developer {
     @Column(name = "developer_id")
     private Integer developerId;
 
-/*    @Column(name = "team_id")
-    private Integer teamId;*/
-
     @Column(name = "developer_employment_date")
     @NotNull
     private Date developerEmploymentDate;
@@ -32,7 +29,7 @@ public class Developer {
     private String developerRole;
 
     @ManyToOne
-    @JoinColumn(name = "team_id", referencedColumnName = "team_id")//, insertable = false, updatable = false)
+    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     @JsonIgnore
     private DeveloperTeam developerTeam;
 
@@ -50,14 +47,6 @@ public class Developer {
         this.developerId = developerId;
     }
 
-  /*  public Integer getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
-    }
-*/
     public Date getDeveloperEmploymentDate() {
         return developerEmploymentDate;
     }

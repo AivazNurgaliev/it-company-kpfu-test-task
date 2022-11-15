@@ -14,7 +14,6 @@ public class DeveloperDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "developer_id")
-    //@JsonIgnore
     private Integer developerId;
 
     @Column(name = "developer_firstname")
@@ -37,14 +36,11 @@ public class DeveloperDetails implements Serializable {
     @NotNull
     private int developerSalary;
 
-    //@Id
     @OneToOne
-    //@JoinColumn(name = "developer_id", referencedColumnName = "developer_id", nullable = false)
     @PrimaryKeyJoinColumn(name = "developer_id", referencedColumnName = "developer_id")
     @JsonIgnore
     private Developer developer;
 
-/*
     public Integer getDeveloperId() {
         return developerId;
     }
@@ -52,7 +48,6 @@ public class DeveloperDetails implements Serializable {
     public void setDeveloperId(Integer developerId) {
         this.developerId = developerId;
     }
-*/
 
     public String getDeveloperFirstname() {
         return developerFirstname;
@@ -107,18 +102,19 @@ public class DeveloperDetails implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeveloperDetails that = (DeveloperDetails) o;
-        return developerSalary == that.developerSalary && developerFirstname.equals(that.developerFirstname) && developerLastname.equals(that.developerLastname) && developerEmail.equals(that.developerEmail) && developerPhoneNumber.equals(that.developerPhoneNumber) && developer.equals(that.developer);
+        return developerSalary == that.developerSalary && Objects.equals(developerId, that.developerId) && developerFirstname.equals(that.developerFirstname) && developerLastname.equals(that.developerLastname) && developerEmail.equals(that.developerEmail) && developerPhoneNumber.equals(that.developerPhoneNumber) && Objects.equals(developer, that.developer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(developerFirstname, developerLastname, developerEmail, developerPhoneNumber, developerSalary, developer);
+        return Objects.hash(developerId, developerFirstname, developerLastname, developerEmail, developerPhoneNumber, developerSalary, developer);
     }
 
     @Override
     public String toString() {
         return "DeveloperDetails{" +
-                "developerFirstname='" + developerFirstname + '\'' +
+                "developerId=" + developerId +
+                ", developerFirstname='" + developerFirstname + '\'' +
                 ", developerLastname='" + developerLastname + '\'' +
                 ", developerEmail='" + developerEmail + '\'' +
                 ", developerPhoneNumber='" + developerPhoneNumber + '\'' +

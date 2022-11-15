@@ -7,11 +7,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-//TODO HASH EQUALS TOSTRING EVERYWHERE
 @Entity
 @Table(name = "it_company_department")
 public class ItCompanyDepartment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
@@ -34,20 +32,10 @@ public class ItCompanyDepartment {
     private String departmentEmail;
 
     @OneToMany(mappedBy = "itCompanyDepartment")
-    //@JsonIgnore
     private List<DeveloperTeam> developerTeams = new ArrayList<>();
 
     @OneToMany(mappedBy = "itCompanyDepartment")
-    //@JsonIgnore
     private List<Client> clients;
-
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
-    }
 
     public Integer getDepartmentId() {
         return departmentId;
@@ -97,17 +85,25 @@ public class ItCompanyDepartment {
         this.developerTeams = developerTeams;
     }
 
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ItCompanyDepartment that = (ItCompanyDepartment) o;
-        return Objects.equals(departmentId, that.departmentId) && departmentLocationCity.equals(that.departmentLocationCity) && departmentAddress.equals(that.departmentAddress) && departmentPhoneNumber.equals(that.departmentPhoneNumber) && departmentEmail.equals(that.departmentEmail) && Objects.equals(developerTeams, that.developerTeams);
+        return Objects.equals(departmentId, that.departmentId) && departmentLocationCity.equals(that.departmentLocationCity) && departmentAddress.equals(that.departmentAddress) && departmentPhoneNumber.equals(that.departmentPhoneNumber) && departmentEmail.equals(that.departmentEmail) && Objects.equals(developerTeams, that.developerTeams) && Objects.equals(clients, that.clients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(departmentId, departmentLocationCity, departmentAddress, departmentPhoneNumber, departmentEmail, developerTeams);
+        return Objects.hash(departmentId, departmentLocationCity, departmentAddress, departmentPhoneNumber, departmentEmail, developerTeams, clients);
     }
 
     @Override
@@ -119,6 +115,7 @@ public class ItCompanyDepartment {
                 ", departmentPhoneNumber='" + departmentPhoneNumber + '\'' +
                 ", departmentEmail='" + departmentEmail + '\'' +
                 ", developerTeams=" + developerTeams +
+                ", clients=" + clients +
                 '}';
     }
 }

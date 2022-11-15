@@ -12,12 +12,6 @@ import java.util.Objects;
 @Table(name = "developer_performance_review")
 public class DeveloperPerformanceReview implements Serializable {
 
-/*
-    @Id
-    @Column(name = "developer_id")
-    private Integer developerId;
-*/
-
     @Column(name = "dpr_rating")
     @NotNull
     private BigDecimal dbrRating;
@@ -30,14 +24,6 @@ public class DeveloperPerformanceReview implements Serializable {
     @JoinColumn(name = "developer_id", referencedColumnName = "developer_id", nullable = false)
     @JsonIgnore
     private Developer developer;
-
-/*    public Integer getDeveloperId() {
-        return developerId;
-    }
-
-    public void setDeveloperId(Integer developerId) {
-        this.developerId = developerId;
-    }*/
 
     public BigDecimal getDbrRating() {
         return dbrRating;

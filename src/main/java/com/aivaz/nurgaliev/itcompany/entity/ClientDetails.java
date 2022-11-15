@@ -13,9 +13,6 @@ import java.util.Objects;
 @Table(name = "client_details")
 public class ClientDetails implements Serializable {
 
-/*    @Id
-    @Column(name = "client_id")
-    private Integer clientId;*/
     @Column(name = "client_email")
     @NotNull
     private String clientEmail;
@@ -34,13 +31,6 @@ public class ClientDetails implements Serializable {
     @JsonIgnore
     private Client client;
 
-/*    public Integer getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }*/
 
     public String getClientEmail() {
         return clientEmail;
