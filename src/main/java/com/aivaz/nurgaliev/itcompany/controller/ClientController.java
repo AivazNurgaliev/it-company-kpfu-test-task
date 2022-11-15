@@ -44,14 +44,4 @@ public class ClientController {
         }
     }
 
-    @GetMapping("/department/{departmentId}/clients")
-    public List<Client> getAllClientsByDepartmentId(@PathVariable(name = "departmentId") Integer departmentId) {
-        try {
-            return clientService.getAllClientsByDepartmentId(departmentId);
-        } catch (DataNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
-    }
 }
