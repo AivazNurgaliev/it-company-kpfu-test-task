@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 public class ItCompanyDepartmentController {
-
     private final ItCompanyDepartmentService departmentService;
     private final ClientService clientService;
     @Autowired
@@ -26,6 +25,14 @@ public class ItCompanyDepartmentController {
         this.clientService = clientService;
     }
 
+    /**
+     * Получение отделения IT компании по id отделения
+     * @param departmentId - id отдела(Integer)
+     * @return
+     * 200-Если запрос прошел успешно.
+     * 404-Если был предоставлен неверный id отделения (не существует отделение).
+     * 500-Ошибка вызванная сервером.
+     */
     @GetMapping("/department/{departmentId}")
     public ItCompanyDepartment getDepartmentById(@PathVariable(name = "departmentId") Integer departmentId) {
         try {
@@ -37,6 +44,13 @@ public class ItCompanyDepartmentController {
         }
     }
 
+    /**
+     * Получение списка всех отделений
+     * @return
+     * 200-Если запрос прошел успешно.
+     * 404-Если был предоставлен неверный id отделения (не существует отделение).
+     * 500-Ошибка вызванная сервером.
+     */
     @GetMapping("/departments")
     public List<ItCompanyDepartment> getAllDepartmentById() {
         try {
@@ -48,7 +62,14 @@ public class ItCompanyDepartmentController {
         }
     }
 
-
+    /**
+     * Получение списка всех клиентов у определённого отделения
+     * @param departmentId - id отделения(Integer)
+     * @return
+     * 200-Если запрос прошел успешно.
+     * 404-Если был предоставлен неверный id отделения (не существует отделение или нет клиентов).
+     * 500-Ошибка вызванная сервером.
+     */
     @GetMapping("/department/{departmentId}/clients")
     public List<Client> getAllClientsByDepartmentId(@PathVariable(name = "departmentId") Integer departmentId) {
         try {
@@ -60,6 +81,14 @@ public class ItCompanyDepartmentController {
         }
     }
 
+    /**
+     * Получение отчёта для определённого отделения по расходам зарплат и доходам от заказчиков
+     * @param departmentId
+     * @return
+     * 200-Если запрос прошел успешно.
+     * 404-Если был предоставлен неверный id отделения (не существует отделение или нет клиентов).
+     * 500-Ошибка вызванная сервером.
+     */
     @GetMapping("/department/{departmentId}/report")
     public DepartmentReport getDepartmentReport(@PathVariable(name = "departmentId") Integer departmentId) {
         try {

@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 public class DeveloperController {
-
     private final DeveloperService developerService;
 
     @Autowired
@@ -22,6 +21,14 @@ public class DeveloperController {
         this.developerService = developerService;
     }
 
+    /**
+     * Получение разработчика по его id
+     * @param developerId - id разработчика(Integer)
+     * @return
+     * 200-Если запрос прошел успешно.
+     * 404-Если был предоставлен неверный id (не существует разработчик).
+     * 500-Ошибка вызванная сервером.
+     */
     @GetMapping("/developer/{developerId}")
     public Developer getDeveloperById(@PathVariable(name = "developerId") Integer developerId) {
         try {
@@ -33,14 +40,5 @@ public class DeveloperController {
         }
     }
 
-    @GetMapping("/team/{teamId}/developers")
-    public List<Developer> getAllDevelopersByTeamId(@PathVariable(name = "teamId") Integer teamId) {
-        try {
-            return developerService.getAllDevelopersByTeamId(teamId);
-        } catch (DataNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
-    }
+
 }
