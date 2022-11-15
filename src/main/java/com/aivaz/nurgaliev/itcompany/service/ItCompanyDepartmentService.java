@@ -6,6 +6,8 @@ import com.aivaz.nurgaliev.itcompany.repository.ItCompanyDepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItCompanyDepartmentService {
 
@@ -25,5 +27,15 @@ public class ItCompanyDepartmentService {
         }
 
         return department;
+    }
+
+    public List<ItCompanyDepartment> getAllDepartments() throws DataNotFoundException {
+        List<ItCompanyDepartment> departments = departmentRepository.findAll();
+
+        if (departments == null) {
+            throw new DataNotFoundException("There's no departments in database");
+        }
+
+        return departments;
     }
 }

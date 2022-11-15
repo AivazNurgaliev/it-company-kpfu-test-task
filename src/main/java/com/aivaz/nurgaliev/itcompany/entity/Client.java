@@ -33,6 +33,7 @@ public class Client {
     private DeveloperTeam developerTeam;
 
     @OneToOne(mappedBy = "client")
+    @JsonIgnore
     private ClientDetails clientDetails;
 
 
