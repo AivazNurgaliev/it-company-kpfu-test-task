@@ -1,6 +1,5 @@
 package com.aivaz.nurgaliev.itcompany.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
