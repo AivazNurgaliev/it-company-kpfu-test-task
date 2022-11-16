@@ -38,6 +38,4 @@ public class DeveloperController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-
-
 }

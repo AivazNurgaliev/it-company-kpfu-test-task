@@ -9,7 +9,12 @@ import com.aivaz.nurgaliev.itcompany.repository.ClientRepository;
 import com.aivaz.nurgaliev.itcompany.repository.DeveloperRepository;
 import com.aivaz.nurgaliev.itcompany.repository.ItCompanyDepartmentRepository;
 import com.aivaz.nurgaliev.itcompany.util.DepartmentReport;
+import com.aivaz.nurgaliev.itcompany.util.PageAndEntityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,18 +25,13 @@ import java.util.List;
 public class ItCompanyDepartmentService {
 
     private final ItCompanyDepartmentRepository departmentRepository;
-    private final DeveloperTeamService teamService;
     private final DeveloperRepository developerRepository;
-    private final ClientRepository clientRepository;
 
     @Autowired
     public ItCompanyDepartmentService(ItCompanyDepartmentRepository departmentRepository,
-                                      DeveloperTeamService teamService,
-                                      DeveloperRepository developerRepository, ClientRepository clientRepository) {
+                                      DeveloperRepository developerRepository) {
         this.departmentRepository = departmentRepository;
-        this.teamService = teamService;
         this.developerRepository = developerRepository;
-        this.clientRepository = clientRepository;
     }
 
     public ItCompanyDepartment getDepartment(Integer departmentId) throws DataNotFoundException {
@@ -45,14 +45,30 @@ public class ItCompanyDepartmentService {
         return department;
     }
 
-    public List<ItCompanyDepartment> getAllDepartments() throws DataNotFoundException {
-        List<ItCompanyDepartment> departments = departmentRepository.findAll();
+    public PageAndEntityResponse<ItCompanyDepartment> getAllDepartments(Integer pageNo, Integer pageSize, String sortBy)
+            throws DataNotFoundException {
 
-        if (departments == null || departments.size() == 0) {
-            throw new DataNotFoundException("There's no departments in database");
+        Pageable paging;
+        if (sortBy.startsWith("-")) {
+            StringBuilder sb = new StringBuilder(sortBy);
+            sortBy = sb.deleteCharAt(0).toString();
+            paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+        } else {
+            paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
         }
 
-        return departments;
+        Page<ItCompanyDepartment> pagedResult = departmentRepository.findAll(paging);
+        if (pagedResult.hasContent()) {
+            PageAndEntityResponse<ItCompanyDepartment> departmentPage = new PageAndEntityResponse<>();
+            departmentPage.setTotalPages(pagedResult.getTotalPages());
+            departmentPage.setTotalElements(pagedResult.getTotalElements());
+            departmentPage.setEntity(pagedResult.getContent());
+
+            return departmentPage;
+        } else {
+            throw new DataNotFoundException("There's no departments in database or " +
+                    "Invalid paging or sorting params or content does not exist");
+        }
     }
 
     public DepartmentReport getDepartmentReport(Integer departmentId) throws DataNotFoundException {
