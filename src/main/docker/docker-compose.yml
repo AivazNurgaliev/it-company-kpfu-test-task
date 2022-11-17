@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  app:
+    image: 'itcompany:latest'
+    build: ./dockerApp
+    container_name: app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  db:
+    image: 'postgres:13.1-alpine'
+    build: ./dockerPGDB
+    restart: always
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: test_task_kpfu_dis_main_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

@@ -11,24 +11,38 @@
 3) Spring Data JPA
 4) Hibernate
 5) PostgreSQL
-6) IntellijIdea (Проект выполнялся в нём)
-7) Postman (запросы тестировались в нём)
+6) Docker и Docker Сompose
+7) IntellijIdea (Проект выполнялся в нём)
+9) Postman (запросы тестировались в нём)
 
 ## Запуск
 1) Сделать клон репозитория
-2) **Создать** **базу данных** под названием: **test_task_kpfu_dis_main_db**
-3) Запустить SQL-скрипт находится в папке **./scripts/sql.txt** в **PgAdmin** или в **терминале**
-4) Зайти в application.properties по адресу ./src/main/resources/application.properties
-5) Поменять следующие строки(Если создана БД с названием в пункте 2, то пункт 6 не менять)
-6) **spring.datasource.url = jdbc:postgresql://localhost:5432/test_task_kpfu_dis_main_db**
-7) Пункт 8 менять если у вас другой владелец БД, по умолчанию postgres
-8) **spring.datasource.username=postgres**
-9) Пункт 10 менять если у вашего владельца другой пароль
-10) **spring.datasource.password=admin**
-11) После успешного создания БД и таблиц в ней и настройке конфигурации сервис готов к запуску.
+2) Перейти в директорию ./src/main/docker
+3) 
+```docker-compose build```
+4) 
+```docker-compose up```
+
+5) Тестировать API в **Postman** (!!!)
+
+
+### Если не получилось запустить docker и docker-compose по каким либо причинам, то:
+1) Создать базу данных(PostgreSQL) под именем: test_task_kpfu_dis_main_db
+2) Пройти в директорию ./scripts и открыть файл sql.txt
+3) В созданной БД в пункте 1, запускаем скрипт из пункта 2 в PgAdmin или в терминале
+4) Зайти в application.properties по пути: ./src/main/resources/application.properties
+5) Поменять datasource.url если что-то изменили(создали бд под другим именем или порт другой)
+6) spring.datasource.url = jdbc:postgresql://localhost:5432/test_task_kpfu_dis_main_db
+7) Если другой владелец БД, то меняем datasource.username
+8) spring.datasource.username=postgres
+9) Если другой пароль от БД, то меняем datasource.url
+10) spring.datasource.password=postgres
+#### Но должно всё работать :)
 
 ### Swagger
 По адресу ``` http://localhost:8080/swagger-ui/index.html ```
+
+Так же сделал комментарии в ./src/controller (во всех классах в контроллере)
 
 ## Работа Сервиса
 
@@ -148,8 +162,8 @@
 6) client - Заказчик (У каждого отделения есть свои заказчики)
 7) client_details - детали о заказчики(бюджет, телефон, почта и тд.)
 
-# ВСТАВИТЬ КАРТИНКУ ./img/database_visualization
+# Визуализация Базы Данных
 
-(https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![db_visual](./img/database_visualization.png)
 
 
