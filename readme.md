@@ -20,6 +20,7 @@
 2) Перейти в директорию ./src/main/docker
 3) 
 ```docker-compose build```
+
 4) 
 ```docker-compose up```
 
